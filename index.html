@@ -20,7 +20,7 @@ body {
 
 /* CARD PRINCIPAL */
 .card {
-    background: rgba(255,182,193,0.85); /* roz transparent */
+    background: rgba(255,182,193,0.6); /* mai transparent */
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0,0,0,0.3);
@@ -63,6 +63,11 @@ button {
     height: 130px;
     object-fit: cover;
     border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
 }
 
 /* TEXT PERSONALIZAT */
@@ -71,6 +76,17 @@ button {
     margin-top: 15px;
     font-size: 1em;
     line-height: 1.3em;
+    opacity: 0;
+}
+
+/* Fade-in pentru text */
+.fade-in {
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 /* MUSIC PLAYER IN CARD GEN SPOTIFY */
@@ -189,7 +205,9 @@ setInterval(() => {
 // BUTON + REVEAL
 function reveal() {
     document.getElementById("gallery").style.display = "flex";
-    document.getElementById("personal-text").style.display = "block";
+    const text = document.getElementById("personal-text");
+    text.style.display = "block";
+    text.classList.add("fade-in");
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
 }
