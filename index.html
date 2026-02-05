@@ -99,13 +99,20 @@ button {
 </audio>
 
 <script>
-// COUNTDOWN
+
 const targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
 setInterval(() => {
     const now = new Date().getTime();
     const d = targetDate - now;
+
+    const days = Math.floor(d / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((d % (1000 * 60)) / 1000);
+
     document.getElementById("countdown").innerHTML =
-        Math.floor(d/(1000*60*60*24)) + " zile";
+        `${days} zile ${hours} ore ${minutes} min ${seconds} sec`;
 }, 1000);
 
 // BUTON + MUZICĂ
