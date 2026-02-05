@@ -11,37 +11,26 @@ body {
     color: white;
     height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
+/* CARD PRINCIPAL */
 .card {
     background: rgba(255,182,193,0.85); /* roz transparent */
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0,0,0,0.3);
     z-index: 2;
-    max-width: 320px;
+    max-width: 450px;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.gallery {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.gallery img {
-    width: 95px;
-    height: 130px;
-    object-fit: cover;
-    border-radius: 15px;
+    transition: all 0.5s ease; /* pentru extindere lină */
 }
 
 button {
@@ -55,9 +44,33 @@ button {
     margin-top: 10px;
 }
 
-#secret {
-    display: none;
+#countdown {
+    margin-top: 10px;
+    font-size: 1.1em;
+}
+
+/* GALERIE POZE */
+.gallery {
+    display: none; /* ascuns inițial */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     margin-top: 15px;
+}
+
+.gallery img {
+    width: 95px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* TEXT PERSONALIZAT */
+#personal-text {
+    display: none; /* ascuns inițial */
+    margin-top: 15px;
+    font-size: 1em;
+    line-height: 1.3em;
 }
 
 /* MUSIC PLAYER IN CARD */
@@ -110,18 +123,20 @@ button {
 <div class="card">
     <h1>💖 Happy Valentine’s Day 💖</h1>
 
-    <div class="gallery">
+    <div id="countdown"></div>
+
+    <button onclick="reveal()">Apasă aici 💌</button>
+
+    <!-- GALERIE POZE -->
+    <div class="gallery" id="gallery">
         <img src="images/poza1.jpg">
         <img src="images/poza2.jpg">
         <img src="images/poza3.jpg">
     </div>
 
-    <div id="countdown"></div>
-
-    <button onclick="reveal()">Apasă aici 💌</button>
-
-    <div id="secret">
-        <p>MESAJUL TĂU ❤️</p>
+    <!-- TEXT PERSONALIZAT -->
+    <div id="personal-text">
+        <p>Dragostea mea, îți doresc să ai o zi minunată plină de zâmbete și fericire ❤️</p>
     </div>
 
     <!-- Music Player în casetă -->
@@ -154,7 +169,8 @@ setInterval(() => {
 
 // BUTON + REVEAL
 function reveal() {
-    document.getElementById("secret").style.display = "block";
+    document.getElementById("gallery").style.display = "flex";
+    document.getElementById("personal-text").style.display = "block";
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
 }
