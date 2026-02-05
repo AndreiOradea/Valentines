@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>❤️ Pentru tine</title>
-
 <style>
 body {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
@@ -16,6 +15,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .card {
@@ -70,18 +70,44 @@ button {
         opacity: 0;
     }
 }
+
+/* Music player CSS */
+#music-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    z-index: 5;
+}
+
+#music-player button {
+    background: #ff4f8b;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
 </style>
 </head>
-
 <body>
 
 <div class="card">
     <h1>💖 Happy Valentine’s Day 💖</h1>
 
     <div class="gallery">
-        <img src="images/IMG_3975.jpeg">
-        <img src="LINK_POZA_2">
-        <img src="LINK_POZA_3">
+        <img src="images/poza1.jpg">
+        <img src="images/poza2.jpg">
+        <img src="images/poza3.jpg">
     </div>
 
     <div id="countdown"></div>
@@ -93,15 +119,20 @@ button {
     </div>
 </div>
 
-<!-- AUDIO LOCAL – FUNCȚIONEAZĂ SIGUR -->
+<!-- AUDIO LOCAL -->
 <audio id="music" preload="auto">
     <source src="the-thrill.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Music player -->
+<div id="music-player">
+    <p>🎵 The Thrill - Wiz Khalifa</p>
+    <button id="play-pause">Play</button>
+</div>
+
 <script>
-
+// COUNTDOWN
 const targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
-
 setInterval(() => {
     const now = new Date().getTime();
     const d = targetDate - now;
@@ -115,13 +146,28 @@ setInterval(() => {
         `${days} zile ${hours} ore ${minutes} min ${seconds} sec`;
 }, 1000);
 
-// BUTON + MUZICĂ
+// BUTON + REVEAL
 function reveal() {
     document.getElementById("secret").style.display = "block";
     document.getElementById("music").play();
+    document.getElementById("play-pause").textContent = "Pause";
 }
 
-// INIMIOARE
+// MUSIC PLAYER
+const audio = document.getElementById("music");
+const btn = document.getElementById("play-pause");
+
+btn.addEventListener("click", () => {
+    if(audio.paused){
+        audio.play();
+        btn.textContent = "Pause";
+    } else {
+        audio.pause();
+        btn.textContent = "Play";
+    }
+});
+
+// INIMIOARE CARE CAD
 setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
@@ -131,6 +177,14 @@ setInterval(() => {
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
 },300);
+
+// Optional: porneste muzica la primul click oriunde pe pagina
+document.body.addEventListener("click", () => {
+    if(audio.paused){
+        audio.play();
+        btn.textContent = "Pause";
+    }
+}, {once:true});
 </script>
 
 </body>
