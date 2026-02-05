@@ -30,7 +30,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.5s ease; /* pentru extindere lină */
+    transition: all 0.5s ease;
+    gap: 15px;
 }
 
 button {
@@ -55,7 +56,6 @@ button {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 15px;
 }
 
 .gallery img {
@@ -67,13 +67,13 @@ button {
 
 /* TEXT PERSONALIZAT */
 #personal-text {
-    display: none; /* ascuns inițial */
+    display: none;
     margin-top: 15px;
     font-size: 1em;
     line-height: 1.3em;
 }
 
-/* MUSIC PLAYER IN CARD */
+/* MUSIC PLAYER IN CARD GEN SPOTIFY */
 #music-card {
     display: flex;
     align-items: center;
@@ -83,17 +83,32 @@ button {
     padding: 10px 15px;
     border-radius: 15px;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 #music-card img#cover {
-    width: 50px;
     height: 50px;
-    object-fit: cover;
+    width: auto; /* auto-dimensionare păstrând proporțiile */
     border-radius: 10px;
 }
 
-#music-card button {
+#music-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    margin-left: 10px;
+    color: white;
+    text-align: left;
+}
+
+#music-info p {
+    margin: 0;
+    line-height: 1.2em;
+    font-size: 0.9em;
+}
+
+#play-pause {
     background: none;
     border: none;
     font-size: 1.5em;
@@ -139,9 +154,13 @@ button {
         <p>Dragostea mea, îți doresc să ai o zi minunată plină de zâmbete și fericire ❤️</p>
     </div>
 
-    <!-- Music Player în casetă -->
+    <!-- Music Player în casetă gen Spotify -->
     <div id="music-card">
         <img src="images/cover.jpg" alt="Cover" id="cover">
+        <div id="music-info">
+            <p id="song-title">The Thrill</p>
+            <p id="artist">Wiz Khalifa</p>
+        </div>
         <button id="play-pause">▶️</button>
     </div>
 </div>
@@ -200,7 +219,7 @@ setInterval(() => {
     setTimeout(()=>h.remove(),6000);
 },300);
 
-// Opțional: muzica pornește la primul click oriunde
+// Pornire muzică la primul click oriunde
 document.body.addEventListener("click", () => {
     if(audio.paused){
         audio.play();
