@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>💖 Pentru tine</title>
 <style>
-/* BACKGROUND ANIMAT */
+/* FUNDAL GRADIENT ANIMAT */
 @keyframes gradientBG {
   0% {background-position: 0% 50%;}
   50% {background-position: 100% 50%;}
@@ -25,6 +25,7 @@ body {
     background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9ccf, #ffc0cb);
     background-size: 400% 400%;
     animation: gradientBG 20s ease infinite;
+    position: relative;
 }
 
 /* CARD PRINCIPAL */
@@ -155,12 +156,13 @@ button {
     cursor: pointer;
 }
 
-/* INIMIOARE */
+/* INIMIOARE CAD + PULSE */
 .heart {
     position: fixed;
     top: -10px;
     animation: fall linear forwards;
     pointer-events: none;
+    z-index: 1;
 }
 
 @keyframes fall {
@@ -169,10 +171,26 @@ button {
         opacity: 0;
     }
 }
+
+/* PULSE INIMIOARE STATIC */
+.bg-heart {
+    position: fixed;
+    font-size: 30px;
+    color: rgba(255,182,193,0.4);
+    animation: pulse 2s infinite;
+    z-index: 0;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.5); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.6; }
+}
 </style>
 </head>
 <body>
 
+<!-- CARD PRINCIPAL -->
 <div class="card" id="card">
     <h1>💖 Happy Valentine’s Day 💖</h1>
 
@@ -192,7 +210,7 @@ button {
         <p>Dragostea mea, îți doresc să ai o zi minunată plină de zâmbete și fericire ❤️</p>
     </div>
 
-    <!-- Music Player în casetă gen Spotify -->
+    <!-- MUSIC PLAYER -->
     <div id="music-card">
         <img src="images/cover.jpg" alt="Cover" id="cover">
         <div id="music-info">
@@ -203,15 +221,25 @@ button {
     </div>
 </div>
 
-<!-- AUDIO LOCAL -->
+<!-- AUDIO -->
 <audio id="music" preload="auto">
     <source src="the-thrill.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// SHOW CARD cu animație la încărcare
+// SHOW CARD LA LOAD
 window.addEventListener("load", () => {
     document.getElementById("card").classList.add("show");
+
+    // CREARE INIMIOARE STATIC PULSE IN FUNDAL
+    for(let i=0; i<8; i++){
+        const h = document.createElement("div");
+        h.className = "bg-heart";
+        h.style.left = (i*12 + Math.random()*5) + "vw";
+        h.style.top = (10 + Math.random()*20) + "vh";
+        h.style.fontSize = (20 + Math.random()*20) + "px";
+        document.body.appendChild(h);
+    }
 });
 
 // COUNTDOWN
@@ -229,7 +257,7 @@ setInterval(() => {
         `${days} zile ${hours} ore ${minutes} min ${seconds} sec`;
 }, 1000);
 
-// BUTON + REVEAL cu animație
+// BUTON REVEAL
 function reveal() {
     document.getElementById("gallery").classList.add("show");
     document.getElementById("personal-text").classList.add("show");
@@ -265,7 +293,7 @@ setInterval(() => {
     setTimeout(()=>h.remove(),6000);
 },300);
 
-// Pornire muzică la primul click oriunde
+// PRIMUL CLICK PENTRU START MUZICĂ
 document.body.addEventListener("click", () => {
     if(audio.paused){
         audio.play();
