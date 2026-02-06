@@ -96,41 +96,6 @@ button {
     transform: scale(1.1);
 }
 
-/* TEXT PERSONALIZAT */
-#personal-text {
-    display: none;
-    margin-top: 15px;
-    font-size: 1em;
-    line-height: 1.3em;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 1s ease;
-}
-
-#personal-text.show {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Typing effect pentru text */
-#personal-text p {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: .15em solid #fff;
-  animation: typing 4s steps(50, end), blink .75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
 /* MUSIC PLAYER IN CARD GEN SPOTIFY */
 #music-card {
     display: flex;
@@ -223,11 +188,6 @@ button {
         <img src="images/poza3.jpg">
     </div>
 
-    <!-- TEXT PERSONALIZAT -->
-    <div id="personal-text">
-        <p>Dragostea mea, îți doresc să ai o zi minunată plină de zâmbete și fericire ❤️</p>
-    </div>
-
     <!-- MUSIC PLAYER -->
     <div id="music-card">
         <img src="images/cover.jpg" alt="Cover" id="cover">
@@ -278,9 +238,6 @@ setInterval(() => {
 // BUTON REVEAL + CONFETTI
 function reveal(){
     document.getElementById("gallery").classList.add("show");
-    const personalText = document.getElementById("personal-text");
-    personalText.style.display = "block";
-    personalText.classList.add("show");
     startConfetti(); // declanșează confetti
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
@@ -314,10 +271,10 @@ setInterval(() => {
     setTimeout(()=>h.remove(),6000);
 },300);
 
-// CONFETTI
+// CONFETTI MAI MULT
 function startConfetti(){
     const colors = ["#ff4f8b","#ff69b4","#ff1493","#ffc0cb","#fff"];
-    const confettiCount = 50;
+    const confettiCount = 120; // mai mult confetti
     for(let i=0; i<confettiCount; i++){
         const confetti = document.createElement("div");
         confetti.style.position = "fixed";
