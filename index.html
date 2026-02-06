@@ -4,8 +4,14 @@
 <meta charset="UTF-8">
 <title>💖 Pentru tine</title>
 <style>
+/* BACKGROUND ANIMAT */
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 body {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
     font-family: Arial, sans-serif;
     text-align: center;
     color: white;
@@ -16,11 +22,14 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9ccf, #ffc0cb);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
 }
 
 /* CARD PRINCIPAL */
 .card {
-    background: rgba(255,182,193,0.6); /* transparent */
+    background: rgba(255,182,193,0.6);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0,0,0,0.3);
@@ -59,7 +68,7 @@ button {
 
 /* GALERIE POZE */
 .gallery {
-    display: none; /* ascuns inițial */
+    display: none;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
@@ -118,7 +127,7 @@ button {
 
 #music-card img#cover {
     height: 50px;
-    width: auto; 
+    width: auto;
     border-radius: 10px;
 }
 
@@ -150,7 +159,6 @@ button {
 .heart {
     position: fixed;
     top: -10px;
-    font-size: 20px;
     animation: fall linear forwards;
     pointer-events: none;
 }
@@ -223,12 +231,8 @@ setInterval(() => {
 
 // BUTON + REVEAL cu animație
 function reveal() {
-    const gallery = document.getElementById("gallery");
-    gallery.classList.add("show");
-
-    const text = document.getElementById("personal-text");
-    text.classList.add("show");
-
+    document.getElementById("gallery").classList.add("show");
+    document.getElementById("personal-text").classList.add("show");
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
 }
@@ -247,13 +251,16 @@ btn.addEventListener("click", () => {
     }
 });
 
-// INIMIOARE CARE CAD
+// INIMIOARE CARE CAD, DIFERITE TIPURI
 setInterval(() => {
+    const hearts = ["❤️", "💖", "💘", "💝", "💕", "❣️"];
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerHTML = "❤️";
+    h.innerHTML = hearts[Math.floor(Math.random()*hearts.length)];
     h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (15 + Math.random()*25) + "px";
     h.style.animationDuration = (3+Math.random()*3)+"s";
+    h.style.color = ["#ff4f8b","#ff69b4","#ff1493","#ffc0cb"][Math.floor(Math.random()*4)];
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
 },300);
