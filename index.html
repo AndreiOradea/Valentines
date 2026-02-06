@@ -20,7 +20,7 @@ body {
 
 /* CARD PRINCIPAL */
 .card {
-    background: rgba(255,182,193,0.6); /* mai transparent */
+    background: rgba(255,182,193,0.6); /* transparent */
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0,0,0,0.3);
@@ -30,8 +30,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.5s ease;
     gap: 15px;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 1s ease;
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 button {
@@ -56,6 +63,15 @@ button {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(-30px);
+    transition: all 1s ease;
+}
+
+.gallery.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .gallery img {
@@ -77,16 +93,14 @@ button {
     font-size: 1em;
     line-height: 1.3em;
     opacity: 0;
+    transform: translateY(-20px);
+    transition: all 1s ease;
 }
 
-/* Fade-in pentru text */
-.fade-in {
-    animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+#personal-text.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* MUSIC PLAYER IN CARD GEN SPOTIFY */
@@ -104,7 +118,7 @@ button {
 
 #music-card img#cover {
     height: 50px;
-    width: auto; /* auto-dimensionare păstrând proporțiile */
+    width: auto; 
     border-radius: 10px;
 }
 
@@ -151,7 +165,7 @@ button {
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="card">
     <h1>💖 Happy Valentine’s Day 💖</h1>
 
     <div id="countdown"></div>
@@ -160,9 +174,9 @@ button {
 
     <!-- GALERIE POZE -->
     <div class="gallery" id="gallery">
-        <img src="images/poza1.jpeg">
-        <img src="images/poza2.jpeg">
-        <img src="images/poza3.jpeg">
+        <img src="images/poza1.jpg">
+        <img src="images/poza2.jpg">
+        <img src="images/poza3.jpg">
     </div>
 
     <!-- TEXT PERSONALIZAT -->
@@ -187,6 +201,11 @@ button {
 </audio>
 
 <script>
+// SHOW CARD cu animație la încărcare
+window.addEventListener("load", () => {
+    document.getElementById("card").classList.add("show");
+});
+
 // COUNTDOWN
 const targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
 setInterval(() => {
@@ -202,12 +221,14 @@ setInterval(() => {
         `${days} zile ${hours} ore ${minutes} min ${seconds} sec`;
 }, 1000);
 
-// BUTON + REVEAL
+// BUTON + REVEAL cu animație
 function reveal() {
-    document.getElementById("gallery").style.display = "flex";
+    const gallery = document.getElementById("gallery");
+    gallery.classList.add("show");
+
     const text = document.getElementById("personal-text");
-    text.style.display = "block";
-    text.classList.add("fade-in");
+    text.classList.add("show");
+
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
 }
