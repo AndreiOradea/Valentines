@@ -96,6 +96,15 @@ button {
     transform: scale(1.1);
 }
 
+/* TEXT PERSONALIZAT SIMPLU */
+#personal-text {
+    display: none;
+    margin-top: 15px;
+    font-size: 1em;
+    line-height: 1.3em;
+    color: white;
+}
+
 /* MUSIC PLAYER IN CARD GEN SPOTIFY */
 #music-card {
     display: flex;
@@ -188,6 +197,11 @@ button {
         <img src="images/poza3.jpg">
     </div>
 
+    <!-- TEXT PERSONALIZAT SIMPLU -->
+    <div id="personal-text">
+        Dragostea mea, îți doresc să ai o zi minunată plină de zâmbete și fericire ❤️
+    </div>
+
     <!-- MUSIC PLAYER -->
     <div id="music-card">
         <img src="images/cover.jpg" alt="Cover" id="cover">
@@ -238,6 +252,7 @@ setInterval(() => {
 // BUTON REVEAL + CONFETTI
 function reveal(){
     document.getElementById("gallery").classList.add("show");
+    document.getElementById("personal-text").style.display = "block"; // apare simplu
     startConfetti(); // declanșează confetti
     audio.play();
     document.getElementById("play-pause").textContent = "⏸️";
